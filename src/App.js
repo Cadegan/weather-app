@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./App.css";
 
 function App() {
@@ -11,9 +12,13 @@ function App() {
 
   useEffect(() => {
     if (city !== "") {
-      fetch(apiUrl)
-        .then((res) => res.json())
-        .then((data) => setWeatherData(data));
+      // fetch(apiUrl)
+      //   .then((res) => res.json())
+      //   .then((data) => setWeatherData(data));
+      axios
+        .get(apiUrl)
+        .then((response) => setWeatherData(response.data))
+        .catch((error) => console.log(error));
     }
   }, [apiUrl, city]);
   // console.log(weatherData);
