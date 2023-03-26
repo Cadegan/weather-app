@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
 import "./App.css";
-// import sun from "../src/assets/sun.svg";
-// import sunIcon from "../src/assets/sun.svg";
 
 interface WeatherData {
   name: string;
@@ -33,22 +31,24 @@ const App = (): JSX.Element => {
   const forecastApiUrl = `${baseUrl}forecast?q=${city}&appid=${apiKey}`;
 
   useEffect(() => {
-    if (city !== "") {
-      axios
-        .get<WeatherData>(apiUrl)
-        .then((response: AxiosResponse<WeatherData>) => {
-          console.log(response.data);
-          setWeatherData(response.data);
-        });
+    const fetchWeatherData = async () => {
+      try {
+        const weatherResponse: AxiosResponse<WeatherData> =
+          await axios.get<WeatherData>(apiUrl);
+        setWeatherData(weatherResponse.data);
 
-      axios
-        .get<ForecastData>(forecastApiUrl)
-        .then((response: AxiosResponse<ForecastData>) => {
-          console.log(response.data);
-          setForecastData(response.data);
-        });
+        const forecastResponse: AxiosResponse<ForecastData> =
+          await axios.get<ForecastData>(forecastApiUrl);
+        setForecastData(forecastResponse.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    if (city !== "") {
+      fetchWeatherData();
     }
-  }, [apiUrl, forecastApiUrl, city]);
+  }, [apiUrl, city, forecastApiUrl]);
 
   const handleSearch = () => {
     setCity(searchText);
@@ -64,6 +64,8 @@ const App = (): JSX.Element => {
     const minutes = date.getUTCMinutes().toString().padStart(2, "0");
     return `${hours}:${minutes}`;
   };
+
+  const kelvinToCelsius = (kelvin: number) => Math.round(kelvin - 273.15);
 
   const renderDailyForecast = (forecastData: ForecastData) => {
     const dailyData = forecastData.list.reduce((accumulator: any, item) => {
@@ -97,8 +99,8 @@ const App = (): JSX.Element => {
         />
         <p>{data.weather[0].main}</p>
         <p>
-          Min: {Math.round(data.temp_min - 273.15)}°C / Max:{" "}
-          {Math.round(data.temp_max - 273.15)}°C
+          Min: {kelvinToCelsius(data.temp_min)}°C / Max:{" "}
+          {kelvinToCelsius(data.temp_max)}°C
         </p>
       </div>
     ));
