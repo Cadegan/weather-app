@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
 import "./App.css";
+// const cloudIcon = require("./assets/cloud.png");
 
 interface WeatherData {
   name: string;
@@ -36,6 +37,7 @@ const App = (): JSX.Element => {
         const weatherResponse: AxiosResponse<WeatherData> =
           await axios.get<WeatherData>(apiUrl);
         setWeatherData(weatherResponse.data);
+        console.log(weatherResponse);
 
         const forecastResponse: AxiosResponse<ForecastData> =
           await axios.get<ForecastData>(forecastApiUrl);
@@ -106,6 +108,21 @@ const App = (): JSX.Element => {
     ));
   };
 
+  const weatherIcons = (main: string) => {
+    const icons = {
+      clear: require("./assets/sun.png"),
+      clouds: require("./assets/cloud.png"),
+      partlyCloudy: require("./assets/sun-cloud.png"),
+      rain: require("./assets/rain.png"),
+      snow: require("./assets/snow.png"),
+    };
+
+    const iconKey = Object.keys(icons).find(
+      (key) => key === main
+    ) as keyof typeof icons;
+    return icons[iconKey] || "/assets/default.png";
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -125,7 +142,7 @@ const App = (): JSX.Element => {
             </p>
             <p>{Math.round(weatherData.main.temp - 273.15)}°C</p>
             <img
-              src={`http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`}
+              src={weatherIcons(weatherData.weather[0].main.toLowerCase())}
               alt="weather icon"
             />
             <p>{weatherData.weather[0].main}</p>
