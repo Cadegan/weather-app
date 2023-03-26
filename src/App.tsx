@@ -28,8 +28,9 @@ const App = (): JSX.Element => {
   const [city, setCity] = useState<string>("");
 
   const apiKey = process.env.REACT_APP_API_KEY as string;
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
-  const forecastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
+  const baseUrl = "https://api.openweathermap.org/data/2.5/";
+  const apiUrl = `${baseUrl}weather?q=${city}&appid=${apiKey}`;
+  const forecastApiUrl = `${baseUrl}forecast?q=${city}&appid=${apiKey}`;
 
   useEffect(() => {
     if (city !== "") {
@@ -39,11 +40,7 @@ const App = (): JSX.Element => {
           console.log(response.data);
           setWeatherData(response.data);
         });
-    }
-  }, [apiUrl, city]);
 
-  useEffect(() => {
-    if (city !== "") {
       axios
         .get<ForecastData>(forecastApiUrl)
         .then((response: AxiosResponse<ForecastData>) => {
@@ -51,7 +48,7 @@ const App = (): JSX.Element => {
           setForecastData(response.data);
         });
     }
-  }, [forecastApiUrl, city]);
+  }, [apiUrl, forecastApiUrl, city]);
 
   const handleSearch = () => {
     setCity(searchText);
