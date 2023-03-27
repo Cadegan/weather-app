@@ -32,19 +32,41 @@ const App = (): JSX.Element => {
   const forecastApiUrl = `${baseUrl}forecast?q=${city}&appid=${apiKey}`;
 
   useEffect(() => {
+    const testApi = async (apiUrl: string) => {
+      try {
+        const response = await axios.get(apiUrl);
+        if (response.status >= 400) {
+          return false;
+        }
+        return response.status === 200;
+      } catch (error) {
+        console.error("Error testing API:", error);
+        return false;
+      }
+    };
+
     const fetchWeatherData = async () => {
+      if (!(await testApi(apiUrl)) || !(await testApi(forecastApiUrl))) {
+        console.error("API not available");
+        handleCityNotFound();
+        return;
+      }
+
       try {
         const weatherResponse: AxiosResponse<WeatherData> =
           await axios.get<WeatherData>(apiUrl);
+
         setWeatherData(weatherResponse.data);
         console.log("weatherResponse", weatherResponse);
 
         const forecastResponse: AxiosResponse<ForecastData> =
           await axios.get<ForecastData>(forecastApiUrl);
+
         setForecastData(forecastResponse.data);
         console.log("forecastResponse", forecastResponse);
       } catch (error) {
         console.error("Error fetching data:", error);
+        handleCityNotFound();
       }
     };
 
@@ -54,7 +76,18 @@ const App = (): JSX.Element => {
   }, [apiUrl, city, forecastApiUrl]);
 
   const handleSearch = () => {
+    if (searchText === "") {
+      console.error("Empty search field");
+      return;
+    }
+
     setCity(searchText);
+  };
+
+  const handleCityNotFound = () => {
+    setWeatherData(null);
+    setForecastData(null);
+    alert("City not found, please check your spelling");
   };
 
   const convertToLocalTime = (
@@ -71,28 +104,31 @@ const App = (): JSX.Element => {
   const kelvinToCelsius = (kelvin: number) => Math.round(kelvin - 273.15);
 
   const renderDailyForecast = (forecastData: ForecastData) => {
-    const dailyData = forecastData.list.reduce((accumulator: any, item) => {
-      const date = new Date(item.dt * 1000).toLocaleDateString();
-      if (!accumulator[date]) {
-        accumulator[date] = {
-          date,
-          weather: item.weather,
-          temp_min: item.main.temp_min,
-          temp_max: item.main.temp_max,
-        };
-      } else {
-        accumulator[date].temp_min = Math.min(
-          accumulator[date].temp_min,
-          item.main.temp_min
-        );
-        accumulator[date].temp_max = Math.max(
-          accumulator[date].temp_max,
-          item.main.temp_max
-        );
-        accumulator[date].weather = item.weather;
-      }
-      return accumulator;
-    }, {});
+    const dailyData = forecastData.list.reduce(
+      (accumulator: Record<string, any>, item) => {
+        const date = new Date(item.dt * 1000).toLocaleDateString();
+        if (!accumulator[date]) {
+          accumulator[date] = {
+            date,
+            weather: item.weather,
+            temp_min: item.main.temp_min,
+            temp_max: item.main.temp_max,
+          };
+        } else {
+          accumulator[date].temp_min = Math.min(
+            accumulator[date].temp_min,
+            item.main.temp_min
+          );
+          accumulator[date].temp_max = Math.max(
+            accumulator[date].temp_max,
+            item.main.temp_max
+          );
+          accumulator[date].weather = item.weather;
+        }
+        return accumulator;
+      },
+      {}
+    );
 
     return Object.values(dailyData).map((data: any, index: number) => (
       <div key={index} className="daily-forecast">
@@ -122,14 +158,13 @@ const App = (): JSX.Element => {
     const iconKey = Object.keys(icons).find(
       (key) => key === main
     ) as keyof typeof icons;
-    return icons[iconKey] || "/assets/default.png";
+    return icons[iconKey];
   };
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>Weather App</h1>
-        {/* <img alt="Sun" src={sunIcon}></img> */}
         <input
           type="text"
           value={searchText}
@@ -164,6 +199,8 @@ const App = (): JSX.Element => {
               {convertToLocalTime(weatherData.sys.sunset, weatherData.timezone)}
             </p>
           </div>
+        ) : weatherData === false ? (
+          <h3>Something went wrong. Please try again later.</h3>
         ) : (
           <h3>No data to display</h3>
         )}
@@ -171,6 +208,8 @@ const App = (): JSX.Element => {
           <div className="forecast-container">
             {renderDailyForecast(forecastData)}
           </div>
+        ) : forecastData === false ? (
+          <h3>Something went wrong. Please try again later.</h3>
         ) : (
           <h3>No forecast data to display</h3>
         )}
