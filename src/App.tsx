@@ -37,11 +37,12 @@ const App = (): JSX.Element => {
         const weatherResponse: AxiosResponse<WeatherData> =
           await axios.get<WeatherData>(apiUrl);
         setWeatherData(weatherResponse.data);
-        console.log(weatherResponse);
+        console.log("weatherResponse", weatherResponse);
 
         const forecastResponse: AxiosResponse<ForecastData> =
           await axios.get<ForecastData>(forecastApiUrl);
         setForecastData(forecastResponse.data);
+        console.log("forecastResponse", forecastResponse);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -88,6 +89,7 @@ const App = (): JSX.Element => {
           accumulator[date].temp_max,
           item.main.temp_max
         );
+        accumulator[date].weather = item.weather;
       }
       return accumulator;
     }, {});
@@ -96,7 +98,7 @@ const App = (): JSX.Element => {
       <div key={index} className="daily-forecast">
         <p>{data.date}</p>
         <img
-          src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`}
+          src={weatherIcons(data.weather[0].main.toLowerCase())}
           alt="weather icon"
         />
         <p>{data.weather[0].main}</p>

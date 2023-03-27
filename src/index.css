@@ -12,6 +12,6 @@ code {
     monospace;
 }
 
-.weather-container img {
+.weather-container img, .daily-forecast img {
 height: 50px;
 }
