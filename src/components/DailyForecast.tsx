@@ -1,5 +1,5 @@
 import React from "react";
-import { kelvinToCelsius, weatherIcons } from "./utils";
+import { kelvinToCelsius, weatherIcons } from "../utils";
 
 interface ForecastData {
   list: {

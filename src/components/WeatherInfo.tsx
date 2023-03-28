@@ -1,5 +1,5 @@
 import React from "react";
-import { convertToLocalTime, kelvinToCelsius, weatherIcons } from "./utils";
+import { convertToLocalTime, kelvinToCelsius, weatherIcons } from "../utils";
 
 interface WeatherInfoProps {
   weatherData: {
