@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from "axios";
 import "./App.css";
 import SearchBar from "./components/SearchBar";
 import WeatherInfo from "./components/WeatherInfo";
+import DailyForecast from "./components/DailyForecast";
 
 interface WeatherData {
   name: string;
@@ -81,49 +82,6 @@ const App = (): JSX.Element => {
     }
   }, [apiUrl, city, forecastApiUrl]);
 
-  // const renderDailyForecast = (forecastData: ForecastData) => {
-  //   const dailyData = forecastData.list.reduce(
-  //     (accumulator: Record<string, any>, item) => {
-  //       const date = new Date(item.dt * 1000).toLocaleDateString();
-  //       if (!accumulator[date]) {
-  //         accumulator[date] = {
-  //           date,
-  //           weather: item.weather,
-  //           temp_min: item.main.temp_min,
-  //           temp_max: item.main.temp_max,
-  //         };
-  //       } else {
-  //         accumulator[date].temp_min = Math.min(
-  //           accumulator[date].temp_min,
-  //           item.main.temp_min
-  //         );
-  //         accumulator[date].temp_max = Math.max(
-  //           accumulator[date].temp_max,
-  //           item.main.temp_max
-  //         );
-  //         accumulator[date].weather = item.weather;
-  //       }
-  //       return accumulator;
-  //     },
-  //     {}
-  //   );
-
-  //   return Object.values(dailyData).map((data: any, index: number) => (
-  //     <div key={index} className="daily-forecast">
-  //       <p>{data.date}</p>
-  //       <img
-  //         // src={weatherIcons(data.weather[0].main.toLowerCase())}
-  //         alt="weather icon"
-  //       />
-  //       <p>{data.weather[0].main}</p>
-  //       {/* <p>
-  //         Min: {kelvinToCelsius(data.temp_min)}°C / Max:{" "}
-  //         {kelvinToCelsius(data.temp_max)}°C
-  //       </p> */}
-  //     </div>
-  //   ));
-  // };
-
   return (
     <div className="App">
       <header className="App-header">
@@ -136,15 +94,13 @@ const App = (): JSX.Element => {
         ) : (
           <h3>No data to display</h3>
         )}
-        {/* {forecastData ? (
-          <div className="forecast-container">
-            {renderDailyForecast(forecastData)}
-          </div>
+        {forecastData ? (
+          <DailyForecast forecastData={forecastData}></DailyForecast>
         ) : forecastData === false ? (
           <h3>Something went wrong. Please try again later.</h3>
         ) : (
-          <h3>No forecast data to display</h3>
-        )} */}
+          <h3>No data to display</h3>
+        )}
       </header>
     </div>
   );
