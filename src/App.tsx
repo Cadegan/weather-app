@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
 import "./App.css";
-// const cloudIcon = require("./assets/cloud.png");
+import SearchBar from "./components/SearchBar";
 
 interface WeatherData {
   name: string;
@@ -23,7 +23,6 @@ interface ForecastData {
 const App = (): JSX.Element => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [forecastData, setForecastData] = useState<ForecastData | null>(null);
-  const [searchText, setSearchText] = useState<string>("");
   const [city, setCity] = useState<string>("");
 
   const apiKey = process.env.REACT_APP_API_KEY as string;
@@ -74,15 +73,6 @@ const App = (): JSX.Element => {
       fetchWeatherData();
     }
   }, [apiUrl, city, forecastApiUrl]);
-
-  const handleSearch = () => {
-    if (searchText === "") {
-      console.error("Empty search field");
-      return;
-    }
-
-    setCity(searchText);
-  };
 
   const handleCityNotFound = () => {
     setWeatherData(null);
@@ -165,13 +155,7 @@ const App = (): JSX.Element => {
     <div className="App">
       <header className="App-header">
         <h1>Weather App</h1>
-        <input
-          type="text"
-          value={searchText}
-          onChange={(event) => setSearchText(event.target.value)}
-          placeholder="Enter a location"
-        />
-        <button onClick={handleSearch}>Search</button>
+        <SearchBar onSearch={setCity}></SearchBar>
         {weatherData ? (
           <div className="weather-container">
             <p>
