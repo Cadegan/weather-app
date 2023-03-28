@@ -8,7 +8,7 @@ const SearchBar: React.FC<SearchProps> = ({ onSearch }) => {
   const [searchText, setSearchText] = useState<string>("");
 
   const handleSearch = () => {
-    if (searchText === "") {
+    if (!searchText) {
       console.error("Empty search field");
       return;
     }
