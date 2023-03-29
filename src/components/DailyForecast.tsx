@@ -1,5 +1,6 @@
 import React from "react";
 import { kelvinToCelsius, weatherIcons } from "../utils";
+import "./DailyForecast.css";
 
 interface ForecastData {
   list: {
@@ -46,7 +47,7 @@ const DailyForecast = ({ forecastData }: ForecastInfoProps): JSX.Element => {
         {Object.values(dailyData).map((data: any, index: number) => (
           <div
             key={index}
-            className="flex flex-col items-center justify-center mr-4 py-4 px-6 bg-white shadow rounded-lg"
+            className="flex flex-col items-center justify-center mr-4 py-4 px-6 rounded-lg neumorphism"
           >
             <img
               src={weatherIcons(data.weather[0].main.toLowerCase())}
