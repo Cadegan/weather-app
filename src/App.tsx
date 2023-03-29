@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
-import "./App.css";
+// import "./App.css";
 import SearchBar from "./components/SearchBar";
 import WeatherInfo from "./components/WeatherInfo";
 import DailyForecast from "./components/DailyForecast";
@@ -86,6 +86,8 @@ const App = (): JSX.Element => {
     <div className="App">
       <header className="App-header">
         <h1>Weather App</h1>
+      </header>
+      <main>
         <SearchBar onSearch={setCity}></SearchBar>
         {weatherData ? (
           <WeatherInfo weatherData={weatherData} />
@@ -101,7 +103,7 @@ const App = (): JSX.Element => {
         ) : (
           <h3>No data to display</h3>
         )}
-      </header>
+      </main>
     </div>
   );
 };

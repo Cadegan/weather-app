@@ -41,20 +41,34 @@ const DailyForecast = ({ forecastData }: ForecastInfoProps): JSX.Element => {
       {}
     );
 
-    return Object.values(dailyData).map((data: any, index: number) => (
-      <div key={index} className="daily-forecast">
-        <p>{data.date}</p>
-        <img
-          src={weatherIcons(data.weather[0].main.toLowerCase())}
-          alt="weather icon"
-        />
-        <p>{data.weather[0].main}</p>
-        <p>
-          Min: {kelvinToCelsius(data.temp_min)}°C / Max:{" "}
-          {kelvinToCelsius(data.temp_max)}°C
-        </p>
+    return (
+      <div className="flex flex-nowrap overflow-x-auto p-4">
+        {Object.values(dailyData).map((data: any, index: number) => (
+          <div
+            key={index}
+            className="flex flex-col items-center justify-center mr-4 py-4 px-6 bg-white shadow rounded-lg"
+          >
+            <img
+              src={weatherIcons(data.weather[0].main.toLowerCase())}
+              alt="weather icon"
+              className="w-12 h-12 mb-2"
+            />
+            <div className="text-center">
+              <p className="font-semibold text-lg">{data.date}</p>
+              <p className="text-gray-600">{data.weather[0].main}</p>
+            </div>
+            <div className="flex items-center justify-between mt-4 w-full text-center">
+              <p className="text-gray-600">
+                Min: {kelvinToCelsius(data.temp_min)}°C
+              </p>
+              <p className="text-gray-600">
+                Max: {kelvinToCelsius(data.temp_max)}°C
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
-    ));
+    );
   };
 
   if (!forecastData) {
