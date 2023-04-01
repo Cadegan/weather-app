@@ -3,7 +3,7 @@
   box-shadow: inset -5px -5px 15px #ffffff, inset 5px 5px 15px #babecc;
 } */
 
-/* .neumorphism {
+/* .dailyForecastCard {
   background: #e0e0e0;
   box-shadow: 5px 5px 10px #cccccc, -5px -5px 10px #f4f4f4;
 } */
@@ -12,27 +12,35 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
   background-color: #f2f2f2;
 }
 
-.neumorphism {
+.forecast-container::before {
+  box-shadow: -5px -5px 10px #ffffff;
+}
+
+.forecast-container::after {
+  box-shadow: 5px 5px 10px #d9d9d9;
+}
+
+.dailyForecastCard {
   position: relative;
-  background-color: #f2f2f2;
-  border-radius: 30px;
-  margin: 20px;
-  padding: 30px;
-  width: 300px;
-  height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #f2f2f2;
+  border-radius: 1.5rem;
+  margin: 1rem;
+  padding: 1rem 1.5rem 1rem 1.5rem;
+  width: 300px;
+  height: 300px;
   transition: all 0.5s ease-in-out;
 }
 
-.neumorphism::before,
-.neumorphism::after {
+.dailyForecastCard::before,
+.dailyForecastCard::after {
   content: "";
   position: absolute;
   top: 0;
@@ -44,51 +52,18 @@
   pointer-events: none;
 }
 
-.neumorphism::before {
+.dailyForecastCard::before {
   box-shadow: -5px -5px 10px #ffffff;
 }
 
-.neumorphism::after {
+.dailyForecastCard::after {
   box-shadow: 5px 5px 10px #d9d9d9;
 }
 
-.neumorphism:hover::before {
+.dailyForecastCard:hover::before {
   box-shadow: -10px -10px 20px #ffffff;
 }
 
-.neumorphism:hover::after {
+.dailyForecastCard:hover::after {
   box-shadow: 10px 10px 20px #d9d9d9;
 }
-
-/* .neumorphism:hover {
-  transform: scale(1.01);
-} */
-
-/* Fonctionne **/
-
-/* .forecast-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f2f2f2;
-}
-
-.neumorphism {
-  background-color: #f2f2f2;
-  box-shadow: 5px 5px 10px #d9d9d9, -5px -5px 10px #ffffff;
-  border-radius: 30px;
-  margin: 20px;
-  padding: 30px;
-  width: 300px;
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transition: box-shadow 0.5s ease-in-out;
-}
-
-.neumorphism:hover {
-  box-shadow: 10px 10px 20px #d9d9d9, -10px -10px 20px #ffffff;
-} */

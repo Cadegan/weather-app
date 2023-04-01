@@ -45,10 +45,7 @@ const DailyForecast = ({ forecastData }: ForecastInfoProps): JSX.Element => {
     return (
       <div className="flex flex-nowrap overflow-x-auto p-4">
         {Object.values(dailyData).map((data: any, index: number) => (
-          <div
-            key={index}
-            className="flex flex-col items-center justify-center mr-4 py-4 px-6 rounded-lg neumorphism"
-          >
+          <div key={index} className="dailyForecastCard">
             <img
               src={weatherIcons(data.weather[0].main.toLowerCase())}
               alt="weather icon"
