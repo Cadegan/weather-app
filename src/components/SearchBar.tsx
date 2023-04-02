@@ -16,20 +16,22 @@ const SearchBar: React.FC<SearchProps> = ({ onSearch }) => {
   };
 
   return (
-    <div className="flex items-center justify-center mt-10">
-      <input
-        type="text"
-        value={searchText}
-        onChange={(event) => setSearchText(event.target.value)}
-        placeholder="Enter a location"
-        className="border border-gray-300 px-3 py-2 rounded-md w-96 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      <button
-        onClick={handleSearch}
-        className="bg-blue-500 text-white px-4 py-2 ml-4 rounded-md font-bold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      >
-        Search
-      </button>
+    <div className="search-container flex justify-center items-center bg-FAFAF5">
+      <div className="search-bar relative flex items-center bg-FAFAF5 rounded-xl m-4 py-2 px-6">
+        <input
+          type="text"
+          value={searchText}
+          onChange={(event) => setSearchText(event.target.value)}
+          placeholder="Enter a location"
+          className="search-input flex-grow bg-transparent border-none outline-none px-4 py-2"
+        />
+        <button
+          onClick={handleSearch}
+          className="search-button bg-gray-200 text-gray-800 font-bold cursor-pointer ml-4 px-6 py-2 rounded-full hover:bg-orange-300 transition duration-300 ease-in-out"
+        >
+          Search
+        </button>
+      </div>
     </div>
   );
 };
