@@ -4,6 +4,7 @@ import axios, { AxiosResponse } from "axios";
 import SearchBar from "./components/SearchBar";
 import WeatherInfo from "./components/WeatherInfo";
 import DailyForecast from "./components/DailyForecast";
+import HouryForecast from "./components/HourForcast";
 
 interface WeatherData {
   name: string;
@@ -98,6 +99,13 @@ const App = (): JSX.Element => {
         )}
         {forecastData ? (
           <DailyForecast forecastData={forecastData}></DailyForecast>
+        ) : forecastData === false ? (
+          <h3>Something went wrong. Please try again later.</h3>
+        ) : (
+          <h3>No data to display</h3>
+        )}
+        {forecastData ? (
+          <HouryForecast forecastData={forecastData}></HouryForecast>
         ) : forecastData === false ? (
           <h3>Something went wrong. Please try again later.</h3>
         ) : (
