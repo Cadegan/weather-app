@@ -40,7 +40,7 @@ const HourlyForecast = ({
             <img
               src={weatherIcons(data.weather[0].description.toLowerCase())}
               alt="weather icon"
-              className="w-12 h-12 mb-2"
+              className="mb-2 w-24"
             />
             <div className="text-center">
               <p className="font-semibold text-lg">

@@ -47,13 +47,13 @@ const DailyForecast = ({ forecastData }: ForecastInfoProps): JSX.Element => {
         {Object.values(dailyData).map((data: any, index: number) => (
           <div key={index} className="dailyForecastCard">
             <img
-              src={weatherIcons(data.weather[0].main.toLowerCase())}
+              src={weatherIcons(data.weather[0].description.toLowerCase())}
               alt="weather icon"
-              // className="w-12 h-12 mb-2 absolute"
+              className="mb-2 w-24"
             />
             <div className="text-center">
               <p className="font-semibold text-lg">{data.date}</p>
-              <p className="text-gray-600">{data.weather[0].main}</p>
+              <p className="text-gray-600">{data.weather[0].description}</p>
             </div>
             <div className="flex items-center justify-between mt-4 w-full text-center">
               <p className="text-gray-600">

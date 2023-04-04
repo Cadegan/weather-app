@@ -86,9 +86,9 @@ const App = (): JSX.Element => {
 
   return (
     <div className="App relative overflow-x-hidden">
-      <header className="App-header">
+      {/* <header className="App-header">
         <h1>Weather App</h1>
-      </header>
+      </header> */}
       <main>
         {weatherData && <MainWeatherIcon weatherData={weatherData} />}
         <SearchBar onSearch={setCity}></SearchBar>
