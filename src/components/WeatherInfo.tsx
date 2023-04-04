@@ -1,5 +1,5 @@
 import React from "react";
-import { convertToLocalTime, kelvinToCelsius, weatherIcons } from "../utils";
+import { convertToLocalTime, kelvinToCelsius } from "../utils";
 
 interface WeatherInfoProps {
   weatherData: {
@@ -23,10 +23,11 @@ const WeatherInfo = ({ weatherData }: WeatherInfoProps) => {
         {weatherData.name}, {weatherData.sys.country}
       </p>
       <p>{kelvinToCelsius(weatherData.main.temp)}°C</p>
-      <img
+      {/* <img
         src={weatherIcons(weatherData.weather[0].description.toLowerCase())}
         alt="weather icon"
-      />
+        className="absolute h-40 -top-20 -right-20 z-20"
+      /> */}
       <p>{weatherData.weather[0].description}</p>
       {/* <p>Description: {weatherData.weather[0].description}</p> */}
       <p>Humidity: {weatherData.main.humidity}%</p>

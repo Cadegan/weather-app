@@ -49,7 +49,7 @@ const DailyForecast = ({ forecastData }: ForecastInfoProps): JSX.Element => {
             <img
               src={weatherIcons(data.weather[0].main.toLowerCase())}
               alt="weather icon"
-              className="w-12 h-12 mb-2"
+              // className="w-12 h-12 mb-2 absolute"
             />
             <div className="text-center">
               <p className="font-semibold text-lg">{data.date}</p>

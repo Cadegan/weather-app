@@ -5,6 +5,7 @@ import SearchBar from "./components/SearchBar";
 import WeatherInfo from "./components/WeatherInfo";
 import DailyForecast from "./components/DailyForecast";
 import HouryForecast from "./components/HourForcast";
+import MainWeatherIcon from "./components/WeatherInfoIcon";
 
 interface WeatherData {
   name: string;
@@ -89,6 +90,7 @@ const App = (): JSX.Element => {
         <h1>Weather App</h1>
       </header>
       <main>
+        {weatherData && <MainWeatherIcon weatherData={weatherData} />}
         <SearchBar onSearch={setCity}></SearchBar>
         {weatherData ? (
           <WeatherInfo weatherData={weatherData} />

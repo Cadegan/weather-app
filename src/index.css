@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.weather-container img,
 .daily-forecast img {
   height: 100px;
 }

@@ -15,13 +15,20 @@ const SearchBar: React.FC<SearchProps> = ({ onSearch }) => {
     onSearch(searchText);
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
-    <div className="search-container flex justify-center items-center bg-FAFAF5">
+    <div className="search-container flex justify-left items-center bg-FAFAF5 relative">
       <div className="search-bar relative flex items-center bg-FAFAF5 rounded-xl m-4 py-2 px-6">
         <input
           type="text"
           value={searchText}
           onChange={(event) => setSearchText(event.target.value)}
+          onKeyDown={handleKeyPress}
           placeholder="Enter a location"
           className="search-input flex-grow bg-transparent border-none outline-none px-4 py-2"
         />
