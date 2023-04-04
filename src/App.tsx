@@ -104,12 +104,13 @@ const App = (): JSX.Element => {
         ) : (
           <h3>No data to display</h3>
         )}
-        {forecastData ? (
-          <HouryForecast forecastData={forecastData}></HouryForecast>
-        ) : forecastData === false ? (
-          <h3>Something went wrong. Please try again later.</h3>
+        {forecastData && weatherData ? (
+          <HouryForecast
+            forecastData={forecastData}
+            timezoneOffset={weatherData?.timezone || 0}
+          />
         ) : (
-          <h3>No data to display</h3>
+          <h3>No hourly forecast data to display</h3>
         )}
       </main>
     </div>

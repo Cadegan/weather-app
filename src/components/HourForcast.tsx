@@ -3,6 +3,7 @@ import { convertToLocalTime, kelvinToCelsius, weatherIcons } from "../utils";
 import "./DailyForecast.css";
 
 interface ForecastData {
+  //   city: { timezone: number };
   list: {
     dt: number;
     main: { temp_min: number; temp_max: number };
@@ -12,6 +13,7 @@ interface ForecastData {
 
 interface ForecastInfoProps {
   forecastData: ForecastData | null;
+  timezoneOffset: number;
 }
 
 const HouryForecast = ({ forecastData }: ForecastInfoProps): JSX.Element => {
