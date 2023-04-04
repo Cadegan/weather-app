@@ -27,19 +27,56 @@ export const convertToLocalTime = (
  * It takes a string and returns an image
  * @param {string} main - string - this is the main weather condition, which is a string.
  * @returns The weatherIcons function is returning an object with the keys of clear, clouds,
- * partlyCloudy, rain, and snow.
+ * scatteredClouds, rain, and snow.
  */
 export const weatherIcons = (main: string) => {
   const icons = {
     clear: require("../assets/sun.png"),
+    scatteredClouds: require("../assets/scatteredClouds.png"),
+    brokenClouds: require("../assets/brokenClouds.png"),
+    sunRain: require("../assets/sunRain.png"),
     clouds: require("../assets/cloud.png"),
-    partlyCloudy: require("../assets/sun-cloud.png"),
     rain: require("../assets/rain.png"),
     snow: require("../assets/snow.png"),
+    lightSnow: require("../assets/lightSnow.png"),
   };
 
-  const iconKey = Object.keys(icons).find(
-    (key) => key === main
-  ) as keyof typeof icons;
+  let iconKey: keyof typeof icons = "clear";
+
+  switch (main.toLowerCase()) {
+    case "clouds":
+    case "overcast clouds":
+      iconKey = "clouds";
+      break;
+    case "light rain":
+      iconKey = "sunRain";
+      break;
+    case "rain":
+    case "drizzle":
+    case "thunderstorm":
+      iconKey = "rain";
+      break;
+    case "light snow":
+      iconKey = "lightSnow";
+      break;
+    case "snow":
+    case "sleet":
+      iconKey = "snow";
+      break;
+    case "clear":
+      iconKey = "clear";
+      break;
+    case "partly cloudy":
+    case "few clouds":
+    case "scattered clouds":
+      iconKey = "scatteredClouds";
+      break;
+    case "broken clouds":
+      iconKey = "brokenClouds";
+      break;
+    default:
+      break;
+  }
+
   return icons[iconKey];
 };

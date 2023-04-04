@@ -24,11 +24,11 @@ const WeatherInfo = ({ weatherData }: WeatherInfoProps) => {
       </p>
       <p>{kelvinToCelsius(weatherData.main.temp)}°C</p>
       <img
-        src={weatherIcons(weatherData.weather[0].main.toLowerCase())}
+        src={weatherIcons(weatherData.weather[0].description.toLowerCase())}
         alt="weather icon"
       />
-      <p>{weatherData.weather[0].main}</p>
-      <p>Description: {weatherData.weather[0].description}</p>
+      <p>{weatherData.weather[0].description}</p>
+      {/* <p>Description: {weatherData.weather[0].description}</p> */}
       <p>Humidity: {weatherData.main.humidity}%</p>
       <p>Wind speed: {weatherData.wind.speed} m/s</p>
       <p>Pressure: {weatherData.main.pressure} hPa</p>

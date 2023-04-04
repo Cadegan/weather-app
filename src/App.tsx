@@ -97,13 +97,6 @@ const App = (): JSX.Element => {
         ) : (
           <h3>No data to display</h3>
         )}
-        {forecastData ? (
-          <DailyForecast forecastData={forecastData}></DailyForecast>
-        ) : forecastData === false ? (
-          <h3>Something went wrong. Please try again later.</h3>
-        ) : (
-          <h3>No data to display</h3>
-        )}
         {forecastData && weatherData ? (
           <HouryForecast
             forecastData={forecastData}
@@ -111,6 +104,13 @@ const App = (): JSX.Element => {
           />
         ) : (
           <h3>No hourly forecast data to display</h3>
+        )}
+        {forecastData ? (
+          <DailyForecast forecastData={forecastData}></DailyForecast>
+        ) : forecastData === false ? (
+          <h3>Something went wrong. Please try again later.</h3>
+        ) : (
+          <h3>No data to display</h3>
         )}
       </main>
     </div>
