@@ -18,11 +18,11 @@ const MainWeatherIcon = ({ weatherData }: WeatherInfoProps) => {
   }
 
   return (
-    <div className="weather-icon-wrapper">
+    <div className="weather-icon-wrapper absolute z-50 -right-20 -top-10 overflow-x-hidden">
       <img
         src={weatherIcons(weatherData.weather[0].description.toLowerCase())}
         alt="weather icon"
-        className="h-40"
+        className="h-80"
       />
     </div>
   );
