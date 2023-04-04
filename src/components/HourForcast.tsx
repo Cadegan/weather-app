@@ -48,8 +48,8 @@ const HourlyForecast = ({
               </p>
               <p className="text-gray-600">{data.weather[0].description}</p>
             </div>
-            <div className="flex items-center justify-between mt-4 w-full text-center">
-              <p className="text-gray-600">
+            <div className="mt-4 w-full text-center">
+              <p className="text-gray-600 ">
                 Temp: {kelvinToCelsius(data.main.temp)}°C
               </p>
             </div>
