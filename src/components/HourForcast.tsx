@@ -16,15 +16,18 @@ interface ForecastInfoProps {
   timezoneOffset: number;
 }
 
-const HouryForecast = ({ forecastData }: ForecastInfoProps): JSX.Element => {
-  console.log("HouryForecast forecastData", forecastData);
-  const renderDailyForecast = (forecastData: ForecastData) => {
-    const today = new Date().toISOString().split("T")[0];
+const HourlyForecast = ({
+  forecastData,
+  timezoneOffset,
+}: ForecastInfoProps): JSX.Element => {
+  console.log("HourlyForecast forecastData", forecastData);
 
-    const hourlyData = forecastData.list.filter((item) => {
-      const itemDate = new Date(item.dt * 1000).toISOString().split("T")[0];
-      return itemDate === today;
-    });
+  const renderHourlyForecast = (forecastData: ForecastData) => {
+    const currentTime = new Date().getTime();
+    const hourlyData = forecastData.list.filter(
+      (item) =>
+        item.dt * 1000 >= currentTime && item.dt * 1000 < currentTime + 86400000
+    );
 
     return (
       <div className="flex flex-nowrap overflow-x-auto p-4">
@@ -37,7 +40,7 @@ const HouryForecast = ({ forecastData }: ForecastInfoProps): JSX.Element => {
             />
             <div className="text-center">
               <p className="font-semibold text-lg">
-                {new Date(data.dt * 1000).toLocaleTimeString()}
+                {convertToLocalTime(data.dt, timezoneOffset)}
               </p>
               <p className="text-gray-600">{data.weather[0].main}</p>
             </div>
@@ -58,9 +61,9 @@ const HouryForecast = ({ forecastData }: ForecastInfoProps): JSX.Element => {
 
   return (
     <div className="forecast-container">
-      {renderDailyForecast(forecastData)}
+      {renderHourlyForecast(forecastData)}
     </div>
   );
 };
 
-export default HouryForecast;
+export default HourlyForecast;
