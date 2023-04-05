@@ -57,6 +57,7 @@
   box-shadow: 10px 10px 20px #d9d9d9;
 }
 
+/*
 .search-bar::before,
 .search-bar::after {
   content: "";
@@ -80,3 +81,4 @@
 .search-button:hover {
   background-color: #d1d1d1;
 }
+*/

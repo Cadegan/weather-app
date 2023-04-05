@@ -85,7 +85,7 @@ const App = (): JSX.Element => {
   }, [apiUrl, city, forecastApiUrl]);
 
   return (
-    <div className="App relative overflow-x-hidden">
+    <div className="App relative overflow-x-hidden bg-ececec min-h-screen">
       {/* <header className="App-header">
         <h1>Weather App</h1>
       </header> */}
