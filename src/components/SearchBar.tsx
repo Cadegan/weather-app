@@ -34,8 +34,7 @@ const SearchBar: React.FC<SearchProps> = ({ onSearch }) => {
         />
         <button
           onClick={handleSearch}
-          // className="search-button bg-gray-200 text-gray-800 font-bold cursor-pointer ml-4 px-6 py-2 rounded-full hover:bg-orange-300 transition duration-300 ease-in-out"
-          className="text-gray-800 text-center font-bold cursor-pointer ml-4 px-6 py-2 rounded-3xl shadow-neumorphicBorder hover:shadow-neumorphicBorderOver active:shadow-neumorphicBorderActive active:text-orange-500 transition duration-200 ease-in-out"
+          className="w-28 text-base text-gray-800 text-center font-bold cursor-pointer ml-4 px-6 py-2 rounded-3xl shadow-neumorphicBorder hover:shadow-neumorphicBorderOver active:shadow-neumorphicBorderActive active:text-orange-500 transition transform duration-200 ease-in-out  hover:scale-[0.98] active:scale-[0.96]"
         >
           Search
         </button>
