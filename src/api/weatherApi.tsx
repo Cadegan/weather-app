@@ -4,10 +4,14 @@ import { WeatherData, ForecastData } from "../utils/types";
 const apiKey = process.env.REACT_APP_API_KEY as string;
 const baseUrl = "https://api.openweathermap.org/data/2.5/";
 
+function buildApiUrl(city: string, endpoint: string): string {
+  return `${baseUrl}${endpoint}?q=${city}&appid=${apiKey}`;
+}
+
 export async function fetchWeatherData(
   city: string
 ): Promise<WeatherData | null> {
-  const apiUrl = `${baseUrl}weather?q=${city}&appid=${apiKey}`;
+  const apiUrl = buildApiUrl(city, "weather");
 
   try {
     const response = await axios.get<WeatherData>(apiUrl);
@@ -21,7 +25,7 @@ export async function fetchWeatherData(
 export async function fetchForecastData(
   city: string
 ): Promise<ForecastData | null> {
-  const forecastApiUrl = `${baseUrl}forecast?q=${city}&appid=${apiKey}`;
+  const forecastApiUrl = buildApiUrl(city, "forecast");
 
   try {
     const response = await axios.get<ForecastData>(forecastApiUrl);
@@ -32,7 +36,12 @@ export async function fetchForecastData(
   }
 }
 
-export async function testApi(apiUrl: string): Promise<boolean> {
+export async function testApi(
+  city: string,
+  endpoint: string
+): Promise<boolean> {
+  const apiUrl = buildApiUrl(city, endpoint);
+
   try {
     const response = await axios.get(apiUrl);
     if (response.status >= 400) {

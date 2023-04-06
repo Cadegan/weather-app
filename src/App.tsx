@@ -14,10 +14,10 @@ const App = (): JSX.Element => {
   const [forecastData, setForecastData] = useState<ForecastData | null>(null);
   const [city, setCity] = useState<string>("");
 
-  const apiKey = process.env.REACT_APP_API_KEY as string;
-  const baseUrl = "https://api.openweathermap.org/data/2.5/";
-  const apiUrl = `${baseUrl}weather?q=${city}&appid=${apiKey}`;
-  const forecastApiUrl = `${baseUrl}forecast?q=${city}&appid=${apiKey}`;
+  // const apiKey = process.env.REACT_APP_API_KEY as string;
+  // const baseUrl = "https://api.openweathermap.org/data/2.5/";
+  // const apiUrl = `${baseUrl}weather?q=${city}&appid=${apiKey}`;
+  // const forecastApiUrl = `${baseUrl}forecast?q=${city}&appid=${apiKey}`;
 
   useEffect(() => {
     const handleCityNotFound = () => {
@@ -27,7 +27,10 @@ const App = (): JSX.Element => {
     };
 
     const fetchData = async () => {
-      if (!(await testApi(apiUrl)) || !(await testApi(forecastApiUrl))) {
+      const apiUrl = testApi(city, "weather");
+      const forecastApiUrl = testApi(city, "forecast");
+
+      if (!apiUrl || !forecastApiUrl) {
         console.error("API not available");
         handleCityNotFound();
         return;
@@ -49,7 +52,7 @@ const App = (): JSX.Element => {
     if (city !== "") {
       fetchData();
     }
-  }, [city, apiUrl, forecastApiUrl, apiKey]);
+  }, [city]);
 
   return (
     <div className="App relative overflow-x-hidden bg-ececec min-h-screen">
