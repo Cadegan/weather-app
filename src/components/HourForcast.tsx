@@ -75,7 +75,7 @@ const HourlyForecast = ({
   }
 
   return (
-    <div className="flex justify-center items-center bg-[#f2f2f2]">
+    <div className="flex justify-center items-center shadow-neumorphicBorderOver">
       {renderHourlyForecast(forecastData, timezoneOffset)}
     </div>
   );

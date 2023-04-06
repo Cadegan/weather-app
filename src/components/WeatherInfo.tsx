@@ -22,29 +22,33 @@ const WeatherInfo = ({ weatherData }: WeatherInfoProps) => {
   }
 
   return (
-    <div className="weather-container flex flex-col items-center">
-      <p>
-        {weatherData.name}, {weatherData.sys.country}
-      </p>
-      <div>
-        {" "}
-        <p>
-          {kelvinToCelsius(weatherData.main.temp)}°C |{" "}
-          {capitalizeFirstLetter(weatherData.weather[0].description)}
+    <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center">
+        <p className="text-5xl mb-4">
+          {weatherData.name}, {weatherData.sys.country}
         </p>
-        <p>Humidity: {weatherData.main.humidity}%</p>
-        <p>Wind speed: {weatherData.wind.speed} m/s</p>
+        <p className="text-5xl mb-4">
+          {kelvinToCelsius(weatherData.main.temp)}°C
+        </p>
       </div>
-      <div className="pressure">
-        <p>Pressure: {weatherData.main.pressure} hPa</p>
-        <p>
-          Sunrise:{" "}
-          {convertToLocalTime(weatherData.sys.sunrise, weatherData.timezone)}
-        </p>
-        <p>
-          Sunset:{" "}
-          {convertToLocalTime(weatherData.sys.sunset, weatherData.timezone)}
-        </p>
+      <div className="flex flex-row">
+        <div>
+          <p>{capitalizeFirstLetter(weatherData.weather[0].description)}</p>
+          <p>Humidity: {weatherData.main.humidity}%</p>
+          <p>Wind speed: {weatherData.wind.speed} m/s</p>
+        </div>
+        <div className="h-auto w-1 shadow-neumorphicBorderOver rounded-lg"></div>
+        <div>
+          <p>Pressure: {weatherData.main.pressure} hPa</p>
+          <p>
+            Sunrise:{" "}
+            {convertToLocalTime(weatherData.sys.sunrise, weatherData.timezone)}
+          </p>
+          <p>
+            Sunset:{" "}
+            {convertToLocalTime(weatherData.sys.sunset, weatherData.timezone)}
+          </p>
+        </div>
       </div>
     </div>
   );
