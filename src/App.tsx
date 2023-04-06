@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import axios, { AxiosResponse } from "axios";
-// import "./App.css";
 import SearchBar from "./components/SearchBar";
 import WeatherInfo from "./components/WeatherInfo";
 import DailyForecast from "./components/DailyForecast";
@@ -14,10 +12,15 @@ const App = (): JSX.Element => {
   const [forecastData, setForecastData] = useState<ForecastData | null>(null);
   const [city, setCity] = useState<string>("");
 
-  // const apiKey = process.env.REACT_APP_API_KEY as string;
-  // const baseUrl = "https://api.openweathermap.org/data/2.5/";
-  // const apiUrl = `${baseUrl}weather?q=${city}&appid=${apiKey}`;
-  // const forecastApiUrl = `${baseUrl}forecast?q=${city}&appid=${apiKey}`;
+  function renderMessage(data: WeatherData | ForecastData | null) {
+    if (data) {
+      return null;
+    } else if (data === null) {
+      return <h3>No data to display</h3>;
+    } else {
+      return <h3>Something went wrong. Please try again later.</h3>;
+    }
+  }
 
   useEffect(() => {
     const handleCityNotFound = () => {
@@ -64,26 +67,25 @@ const App = (): JSX.Element => {
         <SearchBar onSearch={setCity}></SearchBar>
         {weatherData ? (
           <WeatherInfo weatherData={weatherData} />
-        ) : weatherData === false ? (
-          <h3>Something went wrong. Please try again later.</h3>
         ) : (
-          <h3>No data to display</h3>
-        )}
-        {forecastData && weatherData ? (
-          <HouryForecast
-            forecastData={forecastData}
-            timezoneOffset={weatherData?.timezone || 0}
-          />
-        ) : (
-          <h3>No hourly forecast data to display</h3>
+          renderMessage(weatherData)
         )}
         {forecastData ? (
-          <DailyForecast forecastData={forecastData}></DailyForecast>
-        ) : forecastData === false ? (
-          <h3>Something went wrong. Please try again later.</h3>
+          <>
+            <HouryForecast
+              forecastData={forecastData}
+              timezoneOffset={weatherData?.timezone || 0}
+            />
+            <DailyForecast forecastData={forecastData}></DailyForecast>
+          </>
         ) : (
-          <h3>No data to display</h3>
+          renderMessage(forecastData)
         )}
+        {/* {forecastData ? (
+          <DailyForecast forecastData={forecastData}></DailyForecast>
+        ) : (
+          renderMessage(forecastData)
+        )} */}
       </main>
     </div>
   );
