@@ -1,10 +1,12 @@
+/*
 .forecast-container {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #f2f2f2;
 }
-
+*/
+/*
 .forecast-container::before {
   box-shadow: -5px -5px 10px #ffffff;
 }
@@ -12,7 +14,7 @@
 .forecast-container::after {
   box-shadow: 5px 5px 10px #d9d9d9;
 }
-
+/*
 .dailyForecastCard {
   position: relative;
   display: flex;
@@ -23,7 +25,8 @@
   border-radius: 1.5rem;
   margin: 1rem;
   padding: 1rem 1.5rem 1rem 1.5rem;
-  width: 175px;
+  min-width: 175px;
+  max-width: 175px;
   height: 300px;
   transition: all 0.5s ease-in-out;
 }
@@ -56,6 +59,7 @@
 .dailyForecastCard:hover::after {
   box-shadow: 10px 10px 20px #d9d9d9;
 }
+*/
 
 /*
 .search-bar::before,
