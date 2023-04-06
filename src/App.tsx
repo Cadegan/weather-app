@@ -1,28 +1,13 @@
 import React, { useState, useEffect } from "react";
-import axios, { AxiosResponse } from "axios";
+// import axios, { AxiosResponse } from "axios";
 // import "./App.css";
 import SearchBar from "./components/SearchBar";
 import WeatherInfo from "./components/WeatherInfo";
 import DailyForecast from "./components/DailyForecast";
 import HouryForecast from "./components/HourForcast";
 import MainWeatherIcon from "./components/WeatherInfoIcon";
-
-interface WeatherData {
-  name: string;
-  sys: { country: string; sunrise: number; sunset: number };
-  main: { temp: number; humidity: number; pressure: number };
-  weather: { icon: string; main: string; description: string }[];
-  wind: { speed: number };
-  timezone: number;
-}
-
-interface ForecastData {
-  list: {
-    dt: number;
-    main: { temp_min: number; temp_max: number };
-    weather: { icon: string; main: string; description: string }[];
-  }[];
-}
+import { WeatherData, ForecastData } from "./utils/types";
+import { fetchForecastData, fetchWeatherData, testApi } from "./api/weatherApi";
 
 const App = (): JSX.Element => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
@@ -35,54 +20,36 @@ const App = (): JSX.Element => {
   const forecastApiUrl = `${baseUrl}forecast?q=${city}&appid=${apiKey}`;
 
   useEffect(() => {
-    const testApi = async (apiUrl: string) => {
-      try {
-        const response = await axios.get(apiUrl);
-        if (response.status >= 400) {
-          return false;
-        }
-        return response.status === 200;
-      } catch (error) {
-        console.error("Error testing API:", error);
-        return false;
-      }
-    };
-
     const handleCityNotFound = () => {
       setWeatherData(null);
       setForecastData(null);
       alert("City not found, please check your spelling");
     };
 
-    const fetchWeatherData = async () => {
+    const fetchData = async () => {
       if (!(await testApi(apiUrl)) || !(await testApi(forecastApiUrl))) {
         console.error("API not available");
         handleCityNotFound();
         return;
       }
 
-      try {
-        const weatherResponse: AxiosResponse<WeatherData> =
-          await axios.get<WeatherData>(apiUrl);
+      const weatherResponse = await fetchWeatherData(city);
+      const forecastResponse = await fetchForecastData(city);
 
-        setWeatherData(weatherResponse.data);
-        console.log("weatherResponse", weatherResponse);
-
-        const forecastResponse: AxiosResponse<ForecastData> =
-          await axios.get<ForecastData>(forecastApiUrl);
-
-        setForecastData(forecastResponse.data);
-        console.log("forecastResponse", forecastResponse);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+      if (!weatherResponse || !forecastResponse) {
+        console.error("Error fetching data");
         handleCityNotFound();
+        return;
       }
+
+      setWeatherData(weatherResponse);
+      setForecastData(forecastResponse);
     };
 
     if (city !== "") {
-      fetchWeatherData();
+      fetchData();
     }
-  }, [apiUrl, city, forecastApiUrl]);
+  }, [city, apiUrl, forecastApiUrl, apiKey]);
 
   return (
     <div className="App relative overflow-x-hidden bg-ececec min-h-screen">
