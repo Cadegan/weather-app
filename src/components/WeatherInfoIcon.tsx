@@ -1,5 +1,5 @@
 import React from "react";
-import { weatherIcons } from "../utils";
+import { weatherIcons } from "../utils/functions";
 
 interface WeatherInfoProps {
   weatherData: {

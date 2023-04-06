@@ -1,5 +1,10 @@
 import React from "react";
-import { convertToLocalTime, kelvinToCelsius, weatherIcons } from "../utils";
+import {
+  convertToLocalTime,
+  capitalizeFirstLetter,
+  kelvinToCelsius,
+  weatherIcons,
+} from "../utils/functions";
 import "./DailyForecast.css";
 
 interface ForecastData {
@@ -46,7 +51,9 @@ const HourlyForecast = ({
               <p className="font-semibold text-lg">
                 {convertToLocalTime(data.dt, timezoneOffset)}
               </p>
-              <p className="text-gray-600">{data.weather[0].description}</p>
+              <p className="text-gray-600">
+                {capitalizeFirstLetter(data.weather[0].description)}
+              </p>
             </div>
             <div className="mt-4 w-full text-center">
               <p className="text-gray-600 ">

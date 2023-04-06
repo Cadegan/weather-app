@@ -1,5 +1,9 @@
 import React from "react";
-import { convertToLocalTime, kelvinToCelsius } from "../utils";
+import {
+  convertToLocalTime,
+  kelvinToCelsius,
+  capitalizeFirstLetter,
+} from "../utils/functions";
 
 interface WeatherInfoProps {
   weatherData: {
@@ -18,29 +22,30 @@ const WeatherInfo = ({ weatherData }: WeatherInfoProps) => {
   }
 
   return (
-    <div className="weather-container">
+    <div className="weather-container flex flex-col items-center">
       <p>
         {weatherData.name}, {weatherData.sys.country}
       </p>
-      <p>{kelvinToCelsius(weatherData.main.temp)}°C</p>
-      {/* <img
-        src={weatherIcons(weatherData.weather[0].description.toLowerCase())}
-        alt="weather icon"
-        className="absolute h-40 -top-20 -right-20 z-20"
-      /> */}
-      <p>{weatherData.weather[0].description}</p>
-      {/* <p>Description: {weatherData.weather[0].description}</p> */}
-      <p>Humidity: {weatherData.main.humidity}%</p>
-      <p>Wind speed: {weatherData.wind.speed} m/s</p>
-      <p>Pressure: {weatherData.main.pressure} hPa</p>
-      <p>
-        Sunrise:{" "}
-        {convertToLocalTime(weatherData.sys.sunrise, weatherData.timezone)}
-      </p>
-      <p>
-        Sunset:{" "}
-        {convertToLocalTime(weatherData.sys.sunset, weatherData.timezone)}
-      </p>
+      <div>
+        {" "}
+        <p>
+          {kelvinToCelsius(weatherData.main.temp)}°C |{" "}
+          {capitalizeFirstLetter(weatherData.weather[0].description)}
+        </p>
+        <p>Humidity: {weatherData.main.humidity}%</p>
+        <p>Wind speed: {weatherData.wind.speed} m/s</p>
+      </div>
+      <div className="pressure">
+        <p>Pressure: {weatherData.main.pressure} hPa</p>
+        <p>
+          Sunrise:{" "}
+          {convertToLocalTime(weatherData.sys.sunrise, weatherData.timezone)}
+        </p>
+        <p>
+          Sunset:{" "}
+          {convertToLocalTime(weatherData.sys.sunset, weatherData.timezone)}
+        </p>
+      </div>
     </div>
   );
 };

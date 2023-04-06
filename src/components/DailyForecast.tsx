@@ -1,5 +1,9 @@
 import React from "react";
-import { kelvinToCelsius, weatherIcons } from "../utils";
+import {
+  kelvinToCelsius,
+  weatherIcons,
+  capitalizeFirstLetter,
+} from "../utils/functions";
 import "./DailyForecast.css";
 
 interface ForecastData {
@@ -53,7 +57,9 @@ const DailyForecast = ({ forecastData }: ForecastInfoProps): JSX.Element => {
             />
             <div className="text-center">
               <p className="font-semibold text-lg">{data.date}</p>
-              <p className="text-gray-600">{data.weather[0].description}</p>
+              <p className="text-gray-600">
+                {capitalizeFirstLetter(data.weather[0].description)}
+              </p>
             </div>
             <div className="flex items-center justify-between mt-4 w-full text-center">
               <p className="text-gray-600">
