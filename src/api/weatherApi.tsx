@@ -8,32 +8,24 @@ function buildApiUrl(city: string, endpoint: string): string {
   return `${baseUrl}${endpoint}?q=${city}&appid=${apiKey}`;
 }
 
-export async function fetchWeatherData(
-  city: string
-): Promise<WeatherData | null> {
-  const apiUrl = buildApiUrl(city, "weather");
+async function fetchData<T>(city: string, endpoint: string): Promise<T | null> {
+  const apiUrl = buildApiUrl(city, endpoint);
 
   try {
-    const response = await axios.get<WeatherData>(apiUrl);
+    const response = await axios.get<T>(apiUrl);
     return response.data;
   } catch (error) {
-    console.error("Error fetching weather data:", error);
+    console.error(`Error fetching ${endpoint} data:`, error);
     return null;
   }
 }
 
-export async function fetchForecastData(
-  city: string
-): Promise<ForecastData | null> {
-  const forecastApiUrl = buildApiUrl(city, "forecast");
+export function fetchWeatherData(city: string): Promise<WeatherData | null> {
+  return fetchData<WeatherData>(city, "weather");
+}
 
-  try {
-    const response = await axios.get<ForecastData>(forecastApiUrl);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching forecast data:", error);
-    return null;
-  }
+export function fetchForecastData(city: string): Promise<ForecastData | null> {
+  return fetchData<ForecastData>(city, "forecast");
 }
 
 export async function testApi(
