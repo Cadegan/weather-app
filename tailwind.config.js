@@ -21,6 +21,8 @@ module.exports = {
           "-5px -5px 10px rgba(255,255,255,0.75),5px 5px 10px rgba(70,70,70,0.12)",
         neumorphicCardOver:
           "-10px -10px 20px rgba(255,255,255,0.55),10px 10px 20px rgba(70,70,70,0.12)",
+        neumorphicLine:
+          "-5px -5px 10px rgba(255, 255, 255, 0.95), 5px 5px 10px rgba(70, 70, 70, 0.12), inset -2px -2px 4px rgba(255, 255, 255, 0.65), inset 2px 2px 4px rgba(70, 70, 70, 0.22)",
       },
     },
   },
