@@ -43,7 +43,11 @@ export const icons = {
   snow: require("../assets/snow.png"),
   lightSnow: require("../assets/lightSnow.png"),
   sunrise: require("../assets/sunRise.png"),
+  sunset: require("../assets/sunSet.png"),
   humidity: require("../assets/humidity.png"),
+  feelsLike: require("../assets/feelsLike.png"),
+  pressure: require("../assets/pressure.png"),
+  windSpeed: require("../assets/windSpeed.png"),
 };
 
 export const weatherIcons = (main: string) => {
