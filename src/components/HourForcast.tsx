@@ -27,23 +27,23 @@ const HourlyForecast = ({
 }: ForecastInfoProps): JSX.Element => {
   console.log("HourlyForecast forecastData", forecastData);
 
-  const renderHourlyForecast = (
-    forecastData: ForecastData,
-    timezoneOffset: number
-  ) => {
-    const today = new Date().toISOString().split("T")[0];
+  if (!forecastData) {
+    return <h3>No forecast data to display</h3>;
+  }
 
-    const hourlyData = forecastData.list.filter((item) => {
-      const itemDate = new Date(item.dt * 1000).toISOString().split("T")[0];
-      return itemDate === today;
-    });
+  const today = new Date().toISOString().split("T")[0];
 
-    return (
+  const hourlyData = forecastData.list.filter((item) => {
+    const itemDate = new Date(item.dt * 1000).toISOString().split("T")[0];
+    return itemDate === today;
+  });
+
+  return (
+    <div className="flex justify-center items-center shadow-neumorphicBorderOver">
       <div className="flex flex-nowrap overflow-x-auto p-4">
         {hourlyData.map((data: any, index: number) => (
           <div
             key={index}
-            // className="dailyForecastCard"
             className="relative flex flex-col justify-center items-center rounded-3xl m-4 py-4 px-6 h-72 min-w-[175px] max-w-[175px] shadow-neumorphicCard hover:shadow-neumorphicCardOver transition transform duration-500 ease-in-out"
           >
             <img
@@ -67,16 +67,6 @@ const HourlyForecast = ({
           </div>
         ))}
       </div>
-    );
-  };
-
-  if (!forecastData) {
-    return <h3>No forecast data to display</h3>;
-  }
-
-  return (
-    <div className="flex justify-center items-center shadow-neumorphicBorderOver">
-      {renderHourlyForecast(forecastData, timezoneOffset)}
     </div>
   );
 };

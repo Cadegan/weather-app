@@ -37,6 +37,7 @@ export const weatherIcons = (main: string) => {
     sunRain: require("../assets/sunRain.png"),
     clouds: require("../assets/cloud.png"),
     rain: require("../assets/rain.png"),
+    mist: require("../assets/mist.png"),
     snow: require("../assets/snow.png"),
     lightSnow: require("../assets/lightSnow.png"),
   };
@@ -49,12 +50,20 @@ export const weatherIcons = (main: string) => {
       iconKey = "clouds";
       break;
     case "light rain":
+    case "moderate rain":
       iconKey = "sunRain";
       break;
     case "rain":
+    case "light intensity shower rain":
+    case "heavy intensity shower rain":
+    case "heavy intensity rain":
+    case "shower rain":
     case "drizzle":
     case "thunderstorm":
       iconKey = "rain";
+      break;
+    case "mist":
+      iconKey = "mist";
       break;
     case "light snow":
       iconKey = "lightSnow";

@@ -20,6 +20,7 @@ const WeatherInfo = ({ weatherData }: WeatherInfoProps) => {
   if (!weatherData) {
     return <h3>No data to display</h3>;
   }
+  console.log("WeatherData", weatherData);
 
   return (
     <div className="flex flex-col items-center p-4">
@@ -32,13 +33,16 @@ const WeatherInfo = ({ weatherData }: WeatherInfoProps) => {
         </p>
       </div>
       <div className="flex flex-row w-96 justify-between items-center">
-        <div className="flex flex-col text-center justify-between w-40 h-24">
-          <p>{capitalizeFirstLetter(weatherData.weather[0].description)}</p>
+        <div className="flex flex-col text-right justify-between w-72 h-24">
+          <p>
+            Description:{" "}
+            {capitalizeFirstLetter(weatherData.weather[0].description)}
+          </p>
           <p>Humidity: {weatherData.main.humidity}%</p>
           <p>Wind speed: {weatherData.wind.speed} m/s</p>
         </div>
         <div className="h-20 w-1 shadow-neumorphicLine rounded-lg"></div>
-        <div className="flex flex-col text-center justify-between w-40 h-24">
+        <div className="flex flex-col justify-between w-72 h-24">
           <p>Pressure: {weatherData.main.pressure} hPa</p>
           <p>
             Sunrise:{" "}
