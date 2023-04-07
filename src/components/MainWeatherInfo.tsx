@@ -3,25 +3,15 @@ import {
   convertToLocalTime,
   kelvinToCelsius,
   capitalizeFirstLetter,
+  // kelvinToFahrenheit,
 } from "../utils/functions";
+import { WeatherData } from "../utils/types";
 
 interface WeatherInfoProps {
-  weatherData: {
-    name: string;
-    sys: { country: string; sunrise: number; sunset: number };
-    main: {
-      temp: number;
-      feels_like: number;
-      humidity: number;
-      pressure: number;
-    };
-    weather: { icon: string; main: string; description: string }[];
-    wind: { speed: number };
-    timezone: number;
-  } | null;
+  weatherData: WeatherData | null;
 }
 
-const WeatherInfo = ({ weatherData }: WeatherInfoProps) => {
+const MainWeatherInfo = ({ weatherData }: WeatherInfoProps) => {
   if (!weatherData) {
     return <h3>No data to display</h3>;
   }
@@ -30,11 +20,14 @@ const WeatherInfo = ({ weatherData }: WeatherInfoProps) => {
   return (
     <div className="flex flex-col items-center p-4">
       <div className="flex flex-col items-center">
-        <p className="text-5xl mb-4">
+        <p className=" text-4xl mb-4 text-shadow-engraved">
           {weatherData.name}, {weatherData.sys.country}
         </p>
-        <p className="text-5xl mb-4">
-          {kelvinToCelsius(weatherData.main.temp)}°C |{" "}
+        <p className="text-6xl mb-4">
+          {kelvinToCelsius(weatherData.main.temp)}°C
+          {/* {kelvinToFahrenheit(weatherData.main.temp)}°F */}
+        </p>
+        <p className="text-4xl mb-4">
           {capitalizeFirstLetter(weatherData.weather[0].description)}
         </p>
       </div>
@@ -61,4 +54,4 @@ const WeatherInfo = ({ weatherData }: WeatherInfoProps) => {
   );
 };
 
-export default WeatherInfo;
+export default MainWeatherInfo;

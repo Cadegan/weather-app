@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "./components/SearchBar";
-import WeatherInfo from "./components/WeatherInfo";
+import MainWeatherInfo from "./components/MainWeatherInfo";
 import DailyForecast from "./components/DailyForecast";
 import HouryForecast from "./components/HourForcast";
 import MainWeatherIcon from "./components/WeatherInfoIcon";
@@ -66,7 +66,7 @@ const App = (): JSX.Element => {
         {weatherData && <MainWeatherIcon weatherData={weatherData} />}
         <SearchBar onSearch={setCity}></SearchBar>
         {weatherData ? (
-          <WeatherInfo weatherData={weatherData} />
+          <MainWeatherInfo weatherData={weatherData} />
         ) : (
           renderMessage(weatherData)
         )}

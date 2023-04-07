@@ -4,7 +4,7 @@ interface SearchProps {
   onSearch: (city: string) => void;
 }
 
-const SearchBar: React.FC<SearchProps> = ({ onSearch }) => {
+const SearchBar = ({ onSearch }: SearchProps) => {
   const [searchText, setSearchText] = useState<string>("");
 
   const handleSearch = () => {

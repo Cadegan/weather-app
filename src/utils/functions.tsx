@@ -4,6 +4,8 @@
  * @param {number} kelvin - The temperature in Kelvin.
  */
 export const kelvinToCelsius = (kelvin: number) => Math.round(kelvin - 273.15);
+export const kelvinToFahrenheit = (kelvin: number) =>
+  Math.round(((kelvin - 273.15) * 9) / 5 + 32);
 
 /**
  * It takes a timestamp and a timezone offset, and returns a string representing the time in the

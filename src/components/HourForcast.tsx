@@ -6,15 +6,7 @@ import {
   weatherIcons,
 } from "../utils/functions";
 import "./DailyForecast.css";
-
-interface ForecastData {
-  //   city: { timezone: number };
-  list: {
-    dt: number;
-    main: { temp_min: number; temp_max: number };
-    weather: { icon: string; main: string; description: string }[];
-  }[];
-}
+import { ForecastData } from "../utils/types";
 
 interface ForecastInfoProps {
   forecastData: ForecastData | null;
