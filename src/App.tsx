@@ -81,11 +81,6 @@ const App = (): JSX.Element => {
         ) : (
           renderMessage(forecastData)
         )}
-        {/* {forecastData ? (
-          <DailyForecast forecastData={forecastData}></DailyForecast>
-        ) : (
-          renderMessage(forecastData)
-        )} */}
       </main>
     </div>
   );

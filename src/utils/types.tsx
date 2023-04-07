@@ -1,7 +1,12 @@
 export interface WeatherData {
   name: string;
   sys: { country: string; sunrise: number; sunset: number };
-  main: { temp: number; humidity: number; pressure: number };
+  main: {
+    temp: number;
+    feels_like: number;
+    humidity: number;
+    pressure: number;
+  };
   weather: { icon: string; main: string; description: string }[];
   wind: { speed: number };
   timezone: number;

@@ -9,7 +9,12 @@ interface WeatherInfoProps {
   weatherData: {
     name: string;
     sys: { country: string; sunrise: number; sunset: number };
-    main: { temp: number; humidity: number; pressure: number };
+    main: {
+      temp: number;
+      feels_like: number;
+      humidity: number;
+      pressure: number;
+    };
     weather: { icon: string; main: string; description: string }[];
     wind: { speed: number };
     timezone: number;
@@ -29,19 +34,17 @@ const WeatherInfo = ({ weatherData }: WeatherInfoProps) => {
           {weatherData.name}, {weatherData.sys.country}
         </p>
         <p className="text-5xl mb-4">
-          {kelvinToCelsius(weatherData.main.temp)}°C
+          {kelvinToCelsius(weatherData.main.temp)}°C |{" "}
+          {capitalizeFirstLetter(weatherData.weather[0].description)}
         </p>
       </div>
-      <div className="flex flex-row w-96 justify-between items-center">
+      <div className="flex flex-row max-w-max items-center">
         <div className="flex flex-col text-right justify-between w-72 h-24">
-          <p>
-            Description:{" "}
-            {capitalizeFirstLetter(weatherData.weather[0].description)}
-          </p>
+          <p>Feels like: {kelvinToCelsius(weatherData.main.feels_like)}°C</p>
           <p>Humidity: {weatherData.main.humidity}%</p>
           <p>Wind speed: {weatherData.wind.speed} m/s</p>
         </div>
-        <div className="h-20 w-1 shadow-neumorphicLine rounded-lg"></div>
+        <div className="h-20 w-1 shadow-neumorphicLine rounded-lg mx-8"></div>
         <div className="flex flex-col justify-between w-72 h-24">
           <p>Pressure: {weatherData.main.pressure} hPa</p>
           <p>
