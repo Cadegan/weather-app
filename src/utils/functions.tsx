@@ -31,19 +31,22 @@ export const convertToLocalTime = (
  * @returns The weatherIcons function is returning an object with the keys of clear, clouds,
  * scatteredClouds, rain, and snow.
  */
-export const weatherIcons = (main: string) => {
-  const icons = {
-    clear: require("../assets/sun.png"),
-    scatteredClouds: require("../assets/scatteredClouds.png"),
-    brokenClouds: require("../assets/brokenClouds.png"),
-    sunRain: require("../assets/sunRain.png"),
-    clouds: require("../assets/cloud.png"),
-    rain: require("../assets/rain.png"),
-    mist: require("../assets/mist.png"),
-    snow: require("../assets/snow.png"),
-    lightSnow: require("../assets/lightSnow.png"),
-  };
 
+export const icons = {
+  clear: require("../assets/sun.png"),
+  scatteredClouds: require("../assets/scatteredClouds.png"),
+  brokenClouds: require("../assets/brokenClouds.png"),
+  sunRain: require("../assets/sunRain.png"),
+  clouds: require("../assets/cloud.png"),
+  rain: require("../assets/rain.png"),
+  mist: require("../assets/mist.png"),
+  snow: require("../assets/snow.png"),
+  lightSnow: require("../assets/lightSnow.png"),
+  sunrise: require("../assets/sunRise.png"),
+  humidity: require("../assets/humidity.png"),
+};
+
+export const weatherIcons = (main: string) => {
   let iconKey: keyof typeof icons = "clear";
 
   switch (main.toLowerCase()) {
