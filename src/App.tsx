@@ -7,20 +7,20 @@ import MainWeatherIcon from "./components/WeatherInfoIcon";
 import { WeatherData, ForecastData } from "./utils/types";
 import { fetchData, testApi } from "./api/weatherApi";
 
-const App = (): JSX.Element => {
+const App = () => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [forecastData, setForecastData] = useState<ForecastData | null>(null);
   const [city, setCity] = useState<string>("");
 
-  function renderMessage(data: WeatherData | ForecastData | null) {
-    if (data) {
-      return null;
-    } else if (data === null) {
-      return <h3>No data to display</h3>;
-    } else {
-      return <h3>Something went wrong. Please try again later.</h3>;
-    }
-  }
+  // function renderMessage(data: WeatherData | ForecastData | null) {
+  //   if (data) {
+  //     return null;
+  //   } else if (data === null) {
+  //     return <h3>No data to display</h3>;
+  //   } else {
+  //     return <h3>Something went wrong. Please try again later.</h3>;
+  //   }
+  // }
 
   useEffect(() => {
     const handleCityNotFound = () => {
@@ -62,22 +62,13 @@ const App = (): JSX.Element => {
       <main>
         <MainWeatherIcon weatherData={weatherData} />
         <SearchBar onSearch={setCity}></SearchBar>
-        {weatherData ? (
-          <MainWeatherInfo weatherData={weatherData} />
-        ) : (
-          renderMessage(weatherData)
-        )}
-        {forecastData ? (
-          <>
-            <HouryForecast
-              forecastData={forecastData}
-              timezoneOffset={weatherData?.timezone || 0}
-            />
-            <DailyForecast forecastData={forecastData}></DailyForecast>
-          </>
-        ) : (
-          renderMessage(forecastData)
-        )}
+        <MainWeatherInfo weatherData={weatherData} />
+        <HouryForecast
+          forecastData={forecastData}
+          timezoneOffset={weatherData?.timezone || 0}
+        />
+        <DailyForecast forecastData={forecastData}></DailyForecast>
+        {/* : (renderMessage(forecastData) ) */}
       </main>
     </div>
   );

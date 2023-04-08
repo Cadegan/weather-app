@@ -5,20 +5,13 @@ import {
   capitalizeFirstLetter,
 } from "../utils/functions";
 import "./DailyForecast.css";
-
-interface ForecastData {
-  list: {
-    dt: number;
-    main: { temp_min: number; temp_max: number };
-    weather: { icon: string; main: string; description: string }[];
-  }[];
-}
+import { ForecastData } from "../utils/types";
 
 interface ForecastInfoProps {
   forecastData: ForecastData | null;
 }
 
-const DailyForecast = ({ forecastData }: ForecastInfoProps): JSX.Element => {
+const DailyForecast = ({ forecastData }: ForecastInfoProps) => {
   const renderDailyForecast = (forecastData: ForecastData) => {
     const dailyData = forecastData.list.reduce(
       (accumulator: Record<string, any>, item) => {
