@@ -13,18 +13,22 @@ interface WeatherInfoProps {
 }
 
 const MainWeatherIcon = ({ weatherData }: WeatherInfoProps) => {
-  if (!weatherData) {
-    return <h3>No data to display</h3>;
-  }
+  // if (!weatherData) {
+  //   return <h3>No data to display</h3>;
+  // }
 
   return (
-    <div className="weather-icon-wrapper absolute z-50 -right-20 -top-10 overflow-x-hidden">
-      <img
-        src={weatherIcons(weatherData.weather[0].description.toLowerCase())}
-        alt="weather icon"
-        className="h-80"
-      />
-    </div>
+    <>
+      {weatherData && (
+        <div className="weather-icon-wrapper absolute z-50 -right-20 -top-10 overflow-x-hidden">
+          <img
+            src={weatherIcons(weatherData.weather[0].description.toLowerCase())}
+            alt="weather icon"
+            className="h-80"
+          />
+        </div>
+      )}
+    </>
   );
 };
 

@@ -25,7 +25,7 @@ const SearchBar = ({ onSearch }: SearchProps) => {
     <div className="flex justify-center items-center bg-ececec relative">
       <div className="m-4 py-2 px-6">
         <input
-          className="bg-transparent border-none outline-none px-4 py-2 rounded-xl shadow-neumorphicInput"
+          className="bg-transparent border-none outline-none px-4 py-2 rounded-xl shadow-neumorphicBorderActive"
           type="text"
           value={searchText}
           onChange={(event) => setSearchText(event.target.value)}

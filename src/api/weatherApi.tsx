@@ -1,14 +1,17 @@
 import axios from "axios";
-import { WeatherData, ForecastData } from "../utils/types";
+// import { WeatherData, ForecastData } from "../utils/types";
 
-const apiKey = process.env.REACT_APP_API_KEY as string;
 const baseUrl = "https://api.openweathermap.org/data/2.5/";
+const apiKey = process.env.REACT_APP_API_KEY as string;
 
 function buildApiUrl(city: string, endpoint: string): string {
   return `${baseUrl}${endpoint}?q=${city}&appid=${apiKey}`;
 }
 
-async function fetchData<T>(city: string, endpoint: string): Promise<T | null> {
+export async function fetchData<T>(
+  city: string,
+  endpoint: string
+): Promise<T | null> {
   const apiUrl = buildApiUrl(city, endpoint);
 
   try {
@@ -18,14 +21,6 @@ async function fetchData<T>(city: string, endpoint: string): Promise<T | null> {
     console.error(`Error fetching ${endpoint} data:`, error);
     return null;
   }
-}
-
-export function fetchWeatherData(city: string): Promise<WeatherData | null> {
-  return fetchData<WeatherData>(city, "weather");
-}
-
-export function fetchForecastData(city: string): Promise<ForecastData | null> {
-  return fetchData<ForecastData>(city, "forecast");
 }
 
 export async function testApi(

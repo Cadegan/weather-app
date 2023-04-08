@@ -5,7 +5,7 @@ import DailyForecast from "./components/DailyForecast";
 import HouryForecast from "./components/HourForcast";
 import MainWeatherIcon from "./components/WeatherInfoIcon";
 import { WeatherData, ForecastData } from "./utils/types";
-import { fetchForecastData, fetchWeatherData, testApi } from "./api/weatherApi";
+import { fetchData, testApi } from "./api/weatherApi";
 
 const App = (): JSX.Element => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
@@ -29,7 +29,7 @@ const App = (): JSX.Element => {
       alert("City not found, please check your spelling");
     };
 
-    const fetchData = async () => {
+    const loadData = async () => {
       const apiUrl = testApi(city, "weather");
       const forecastApiUrl = testApi(city, "forecast");
 
@@ -39,8 +39,8 @@ const App = (): JSX.Element => {
         return;
       }
 
-      const weatherResponse = await fetchWeatherData(city);
-      const forecastResponse = await fetchForecastData(city);
+      const weatherResponse = await fetchData<WeatherData>(city, "weather");
+      const forecastResponse = await fetchData<ForecastData>(city, "forecast");
 
       if (!weatherResponse || !forecastResponse) {
         console.error("Error fetching data");
@@ -53,17 +53,14 @@ const App = (): JSX.Element => {
     };
 
     if (city !== "") {
-      fetchData();
+      loadData();
     }
   }, [city]);
 
   return (
     <div className="App relative overflow-x-hidden bg-ececec min-h-screen">
-      {/* <header className="App-header">
-        <h1>Weather App</h1>
-      </header> */}
       <main>
-        {weatherData && <MainWeatherIcon weatherData={weatherData} />}
+        <MainWeatherIcon weatherData={weatherData} />
         <SearchBar onSearch={setCity}></SearchBar>
         {weatherData ? (
           <MainWeatherInfo weatherData={weatherData} />
