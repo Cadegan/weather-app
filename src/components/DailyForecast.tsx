@@ -12,43 +12,43 @@ interface ForecastInfoProps {
   isLoading: boolean;
 }
 
+const getDate = (timestamp: number) =>
+  new Date(timestamp * 1000).toLocaleDateString();
+
+const createDailyData = (list: any[]) => {
+  return list.reduce((accumulator: Record<string, any>, item) => {
+    const date = getDate(item.dt);
+    if (!accumulator[date]) {
+      accumulator[date] = {
+        date,
+        weather: item.weather,
+        temp_min: item.main.temp_min,
+        temp_max: item.main.temp_max,
+      };
+    } else {
+      accumulator[date].temp_min = Math.min(
+        accumulator[date].temp_min,
+        item.main.temp_min
+      );
+      accumulator[date].temp_max = Math.max(
+        accumulator[date].temp_max,
+        item.main.temp_max
+      );
+      accumulator[date].weather = item.weather;
+    }
+    return accumulator;
+  }, {});
+};
+
 const DailyForecast = ({ forecastData, isLoading }: ForecastInfoProps) => {
   if (!forecastData && !isLoading) {
     return <h3 className="flex justify-center">No forecast data to display</h3>;
   }
 
   const numDays = forecastData
-    ? new Set(
-        forecastData.list.map((item) =>
-          new Date(item.dt * 1000).toLocaleDateString()
-        )
-      ).size
-    : 0;
-
-  const dailyData = forecastData
-    ? forecastData.list.reduce((accumulator: Record<string, any>, item) => {
-        const date = new Date(item.dt * 1000).toLocaleDateString();
-        if (!accumulator[date]) {
-          accumulator[date] = {
-            date,
-            weather: item.weather,
-            temp_min: item.main.temp_min,
-            temp_max: item.main.temp_max,
-          };
-        } else {
-          accumulator[date].temp_min = Math.min(
-            accumulator[date].temp_min,
-            item.main.temp_min
-          );
-          accumulator[date].temp_max = Math.max(
-            accumulator[date].temp_max,
-            item.main.temp_max
-          );
-          accumulator[date].weather = item.weather;
-        }
-        return accumulator;
-      }, {})
-    : {};
+    ? new Set(forecastData.list.map((item) => getDate(item.dt))).size
+    : 6;
+  const dailyData = forecastData ? createDailyData(forecastData.list) : {};
 
   const tileElements = isLoading
     ? Array(numDays)
