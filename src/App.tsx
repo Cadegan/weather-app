@@ -69,7 +69,10 @@ const App = () => {
           />
         )}
 
-        <DailyForecast forecastData={forecastData}></DailyForecast>
+        <DailyForecast
+          forecastData={forecastData}
+          isLoading={isLoading}
+        ></DailyForecast>
         {/* : (renderMessage(forecastData) ) */}
       </main>
     </div>
