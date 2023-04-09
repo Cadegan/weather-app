@@ -6,6 +6,7 @@ import HouryForecast from "./components/HourForcast";
 import MainWeatherIcon from "./components/WeatherInfoIcon";
 import { WeatherData, ForecastData } from "./utils/types";
 import { fetchData, testApi } from "./api/weatherApi";
+import SkeletonLoader from "./components/SkeletonLoader";
 
 const App = () => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
@@ -59,7 +60,8 @@ const App = () => {
         <SearchBar onSearch={setCity}></SearchBar>
         <MainWeatherInfo weatherData={weatherData} />
         {isLoading ? (
-          <div>Loading</div>
+          // <div>Loading</div>
+          <SkeletonLoader></SkeletonLoader>
         ) : (
           <HouryForecast
             forecastData={forecastData}

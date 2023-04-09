@@ -4,7 +4,6 @@ import {
   weatherIcons,
   capitalizeFirstLetter,
 } from "../utils/functions";
-import "./DailyForecast.css";
 import { ForecastData } from "../utils/types";
 
 interface ForecastInfoProps {
@@ -12,34 +11,38 @@ interface ForecastInfoProps {
 }
 
 const DailyForecast = ({ forecastData }: ForecastInfoProps) => {
-  const renderDailyForecast = (forecastData: ForecastData) => {
-    const dailyData = forecastData.list.reduce(
-      (accumulator: Record<string, any>, item) => {
-        const date = new Date(item.dt * 1000).toLocaleDateString();
-        if (!accumulator[date]) {
-          accumulator[date] = {
-            date,
-            weather: item.weather,
-            temp_min: item.main.temp_min,
-            temp_max: item.main.temp_max,
-          };
-        } else {
-          accumulator[date].temp_min = Math.min(
-            accumulator[date].temp_min,
-            item.main.temp_min
-          );
-          accumulator[date].temp_max = Math.max(
-            accumulator[date].temp_max,
-            item.main.temp_max
-          );
-          accumulator[date].weather = item.weather;
-        }
-        return accumulator;
-      },
-      {}
-    );
+  if (!forecastData) {
+    return <h3 className="flex justify-center">No forecast data to display</h3>;
+  }
 
-    return (
+  const dailyData = forecastData.list.reduce(
+    (accumulator: Record<string, any>, item) => {
+      const date = new Date(item.dt * 1000).toLocaleDateString();
+      if (!accumulator[date]) {
+        accumulator[date] = {
+          date,
+          weather: item.weather,
+          temp_min: item.main.temp_min,
+          temp_max: item.main.temp_max,
+        };
+      } else {
+        accumulator[date].temp_min = Math.min(
+          accumulator[date].temp_min,
+          item.main.temp_min
+        );
+        accumulator[date].temp_max = Math.max(
+          accumulator[date].temp_max,
+          item.main.temp_max
+        );
+        accumulator[date].weather = item.weather;
+      }
+      return accumulator;
+    },
+    {}
+  );
+
+  return (
+    <div className="flex justify-center items-center">
       <div className="flex flex-nowrap overflow-x-auto p-4">
         {Object.values(dailyData).map((data: any, index: number) => (
           <div
@@ -68,16 +71,6 @@ const DailyForecast = ({ forecastData }: ForecastInfoProps) => {
           </div>
         ))}
       </div>
-    );
-  };
-
-  if (!forecastData) {
-    return <h3 className="flex justify-center">No forecast data to display</h3>;
-  }
-
-  return (
-    <div className="flex justify-center items-center bg-[#f2f2f2]">
-      {renderDailyForecast(forecastData)}
     </div>
   );
 };

@@ -5,7 +5,7 @@ import {
   kelvinToCelsius,
   weatherIcons,
 } from "../utils/functions";
-import "./DailyForecast.css";
+// import "./DailyForecast.css";
 import { ForecastData } from "../utils/types";
 
 interface ForecastInfoProps {
