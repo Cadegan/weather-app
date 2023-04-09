@@ -11,16 +11,7 @@ const App = () => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [forecastData, setForecastData] = useState<ForecastData | null>(null);
   const [city, setCity] = useState<string>("");
-
-  // function renderMessage(data: WeatherData | ForecastData | null) {
-  //   if (data) {
-  //     return null;
-  //   } else if (data === null) {
-  //     return <h3>No data to display</h3>;
-  //   } else {
-  //     return <h3>Something went wrong. Please try again later.</h3>;
-  //   }
-  // }
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const handleCityNotFound = () => {
@@ -30,12 +21,14 @@ const App = () => {
     };
 
     const loadData = async () => {
+      setIsLoading(true);
       const apiUrl = testApi(city, "weather");
       const forecastApiUrl = testApi(city, "forecast");
 
       if (!apiUrl || !forecastApiUrl) {
         console.error("API not available");
         handleCityNotFound();
+        setIsLoading(false);
         return;
       }
 
@@ -45,11 +38,13 @@ const App = () => {
       if (!weatherResponse || !forecastResponse) {
         console.error("Error fetching data");
         handleCityNotFound();
+        setIsLoading(false);
         return;
       }
 
       setWeatherData(weatherResponse);
       setForecastData(forecastResponse);
+      setIsLoading(false);
     };
 
     if (city !== "") {
@@ -63,10 +58,15 @@ const App = () => {
         <MainWeatherIcon weatherData={weatherData} />
         <SearchBar onSearch={setCity}></SearchBar>
         <MainWeatherInfo weatherData={weatherData} />
-        <HouryForecast
-          forecastData={forecastData}
-          timezoneOffset={weatherData?.timezone || 0}
-        />
+        {isLoading ? (
+          <div>Loading</div>
+        ) : (
+          <HouryForecast
+            forecastData={forecastData}
+            timezoneOffset={weatherData?.timezone || 0}
+          />
+        )}
+
         <DailyForecast forecastData={forecastData}></DailyForecast>
         {/* : (renderMessage(forecastData) ) */}
       </main>

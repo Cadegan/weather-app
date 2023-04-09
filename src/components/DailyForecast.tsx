@@ -72,7 +72,7 @@ const DailyForecast = ({ forecastData }: ForecastInfoProps) => {
   };
 
   if (!forecastData) {
-    return <h3>No forecast data to display</h3>;
+    return <h3 className="flex justify-center">No forecast data to display</h3>;
   }
 
   return (
