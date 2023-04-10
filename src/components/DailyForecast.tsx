@@ -50,7 +50,7 @@ const DailyForecast = ({ forecastData, isLoading }: ForecastInfoProps) => {
     : 6;
   const dailyData = forecastData ? createDailyData(forecastData.list) : {};
 
-  const tileElements = isLoading
+  const dailyForecastElements = isLoading
     ? Array(numDays)
         .fill(0)
         .map((_, index) => <SkeletonLoader key={index} />)
@@ -83,7 +83,9 @@ const DailyForecast = ({ forecastData, isLoading }: ForecastInfoProps) => {
 
   return (
     <div className="flex justify-center items-center">
-      <div className="flex flex-nowrap overflow-x-auto p-4">{tileElements}</div>
+      <div className="flex flex-nowrap overflow-x-auto p-4">
+        {dailyForecastElements}
+      </div>
     </div>
   );
 };
