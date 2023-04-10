@@ -19,6 +19,10 @@ const HourlyForecast = ({
   timezoneOffset,
   isLoading,
 }: ForecastInfoProps) => {
+  if (!forecastData && !isLoading) {
+    return <h3 className="flex justify-center">No forecast data to display</h3>;
+  }
+
   const today = new Date().toISOString().split("T")[0];
 
   const hourlyData = forecastData

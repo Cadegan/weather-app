@@ -41,9 +41,9 @@ const createDailyData = (list: any[]) => {
 };
 
 const DailyForecast = ({ forecastData, isLoading }: ForecastInfoProps) => {
-  if (!forecastData && !isLoading) {
-    return <h3 className="flex justify-center">No forecast data to display</h3>;
-  }
+  // if (!forecastData && !isLoading) {
+  //   return <h3 className="flex justify-center">No forecast data to display</h3>;
+  // }
 
   const numDays = forecastData
     ? new Set(forecastData.list.map((item) => getDate(item.dt))).size
