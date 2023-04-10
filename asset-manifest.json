@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/weather-app/static/css/main.f83a40da.css",
+    "main.js": "/weather-app/static/js/main.8c0934e0.js",
+    "static/js/787.d9312eb8.chunk.js": "/weather-app/static/js/787.d9312eb8.chunk.js",
+    "static/media/sun.png": "/weather-app/static/media/sun.ec4c815053f2bba5fee7.png",
+    "static/media/scatteredClouds.png": "/weather-app/static/media/scatteredClouds.2b28de872e5cdd0cfe47.png",
+    "static/media/lightSnow.png": "/weather-app/static/media/lightSnow.bbe94da2faff9a4d3321.png",
+    "static/media/sunRain.png": "/weather-app/static/media/sunRain.2fa52621fe4b629c00c6.png",
+    "static/media/brokenClouds.png": "/weather-app/static/media/brokenClouds.3dc851e8216bd0204249.png",
+    "static/media/rain.png": "/weather-app/static/media/rain.6bcd0d06daba90bbd9df.png",
+    "static/media/mist.png": "/weather-app/static/media/mist.4b27d71e26950acf8f24.png",
+    "static/media/cloud.png": "/weather-app/static/media/cloud.ea4c2276cc4b6560cca1.png",
+    "static/media/pressure.png": "/weather-app/static/media/pressure.4428522c911ab399c97c.png",
+    "static/media/snow.png": "/weather-app/static/media/snow.2cf8eeb41833bc069b71.png",
+    "static/media/sunSet.png": "/weather-app/static/media/sunSet.bf2ef71c5cd591767d7d.png",
+    "static/media/sunRise.png": "/weather-app/static/media/sunRise.03445d7b30a447d82bac.png",
+    "static/media/humidity.png": "/weather-app/static/media/humidity.e55995fa9f4228454f5a.png",
+    "static/media/feelsLike.png": "/weather-app/static/media/feelsLike.9b26a6c3e840f68661a7.png",
+    "static/media/windSpeed.png": "/weather-app/static/media/windSpeed.b05746d42a01764e6c01.png",
+    "index.html": "/weather-app/index.html",
+    "main.f83a40da.css.map": "/weather-app/static/css/main.f83a40da.css.map",
+    "main.8c0934e0.js.map": "/weather-app/static/js/main.8c0934e0.js.map",
+    "787.d9312eb8.chunk.js.map": "/weather-app/static/js/787.d9312eb8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f83a40da.css",
+    "static/js/main.8c0934e0.js"
+  ]
+}
