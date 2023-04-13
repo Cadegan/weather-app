@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "./components/SearchBar";
 import MainWeatherInfo from "./components/MainWeatherInfo";
+import MainWeatherIcon from "./components/MainWeatherIcon";
 import DailyForecast from "./components/DailyForecast";
 import HouryForecast from "./components/HourlyForecast";
-import MainWeatherIcon from "./components/WeatherInfoIcon";
 import { WeatherData, ForecastData } from "./utils/types";
 import { fetchData, testApi } from "./api/weatherApi";
 
