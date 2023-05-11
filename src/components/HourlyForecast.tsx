@@ -1,3 +1,9 @@
+/**
+ * A React component for displaying daily weather forecast information
+ * @file HourlyForecast component.
+ * @module components/HourlyForecast
+ */
+
 import React from "react";
 import {
   convertToLocalTime,

@@ -1,3 +1,9 @@
+/**
+ * A React component for displaying MainWeatherIcon forecast information
+ * @file MainWeatherIcon component.
+ * @module components/MainWeatherIcon
+ */
+
 import React from "react";
 import { weatherIcons } from "../utils/functions";
 import { WeatherData } from "../utils/types";

@@ -1,3 +1,9 @@
+/**
+ * A React component for displaying the SkeletonLoader
+ * @file SkeletonLoader component.
+ * @module components/SkeletonLoader
+ */
+
 import React from "react";
 
 const SkeletonLoader = () => {

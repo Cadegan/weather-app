@@ -1,3 +1,9 @@
+/**
+ * A React component for displaying main weather forecast information
+ * @file WeatherInfoProps component.
+ * @module components/WeatherInfoProps
+ */
+
 import React from "react";
 import {
   convertToLocalTime,

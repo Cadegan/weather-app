@@ -1,3 +1,9 @@
+/**
+ * A React component for displaying daily weather forecast information
+ * @file DailyForecast component.
+ * @module components/DailyForecast
+ */
+
 import React from "react";
 import {
   kelvinToCelsius,
@@ -15,36 +21,40 @@ interface ForecastInfoProps {
 const getDate = (timestamp: number) =>
   new Date(timestamp * 1000).toLocaleDateString();
 
+/**
+ * The function creates daily weather data by reducing a list of weather items and grouping them by
+ * date while also calculating the minimum and maximum temperature for each day.
+ * @param {any[]} list - The `list` parameter is an array of objects representing weather data for
+ * different dates. Each object in the array should have properties such as `dt` (date and time),
+ * `weather` (an array of weather conditions), and `main` (an object with temperature information).
+ * @returns The function `createDailyData` is returning an object that contains daily weather data. The
+ * object is created by using the `reduce` method on an array of weather data. The keys of the object
+ * are the dates of the weather data, and the values are objects that contain the minimum and maximum
+ * temperature and the weather condition for that date.
+ */
 const createDailyData = (list: any[]) => {
-  return list.reduce((accumulator: Record<string, any>, item) => {
+  return list.reduce((accumulator, item) => {
     const date = getDate(item.dt);
-    if (!accumulator[date]) {
-      accumulator[date] = {
-        date,
-        weather: item.weather,
-        temp_min: item.main.temp_min,
-        temp_max: item.main.temp_max,
-      };
-    } else {
-      accumulator[date].temp_min = Math.min(
-        accumulator[date].temp_min,
-        item.main.temp_min
-      );
-      accumulator[date].temp_max = Math.max(
-        accumulator[date].temp_max,
-        item.main.temp_max
-      );
-      accumulator[date].weather = item.weather;
-    }
+    accumulator[date] = accumulator[date] || {
+      date,
+      weather: item.weather,
+      temp_min: item.main.temp_min,
+      temp_max: item.main.temp_max,
+    };
+    accumulator[date].temp_min = Math.min(
+      accumulator[date].temp_min,
+      item.main.temp_min
+    );
+    accumulator[date].temp_max = Math.max(
+      accumulator[date].temp_max,
+      item.main.temp_max
+    );
+    accumulator[date].weather = item.weather;
     return accumulator;
   }, {});
 };
 
 const DailyForecast = ({ forecastData, isLoading }: ForecastInfoProps) => {
-  // if (!forecastData && !isLoading) {
-  //   return <h3 className="flex justify-center">No forecast data to display</h3>;
-  // }
-
   const numDays = forecastData
     ? new Set(forecastData.list.map((item) => getDate(item.dt))).size
     : 6;

@@ -1,3 +1,9 @@
+/**
+ * A React component for displaying the SearchBar
+ * @file SearchBar component.
+ * @module components/SearchBar
+ */
+
 import React, { useState } from "react";
 
 interface SearchProps {
